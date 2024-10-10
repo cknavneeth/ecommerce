@@ -19,6 +19,53 @@
 
 
        }
+       .product-form {
+    margin-bottom: 20px;
+}
+
+.product-form .d-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Spacing between the boxes */
+    align-items: center;
+}
+
+.product-form label {
+    font-size: 16px;
+    margin-right: 5px; /* Adjusted for smaller spacing */
+}
+
+.tiny-box {
+    width: 30px;  /* Width of the input box */
+    height: 25px; /* Height of the input box */
+    padding: 3px; /* Padding inside the input box */
+    font-size: 12px; /* Smaller font size for input */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+    text-align: center; /* Center text inside the box */
+    box-sizing: border-box; /* Includes padding and border in the width */
+}
+
+.product-form div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .product-form .d-flex {
+        gap: 10px; /* Smaller gap on mobile */
+    }
+
+    .tiny-box {
+        width: 25px; /* Smaller input box for mobile */
+        height: 20px; /* Smaller height for mobile */
+        font-size: 10px; /* Smaller font size for mobile */
+    }
+}
+
 </style>
    <section class="content-main">
        <div class="row">
@@ -39,7 +86,7 @@
                                    class="form-control border" id="product_name">
                                <div id="productName-error" class="error-message"></div>
                            </div>
-                           <div class="col-lg-4 mb-4">
+                           <!-- <div class="col-lg-4 mb-4">
                                <label class="form-label">Brand</label>
                                <select class="form-select border" name="brand">
                                    
@@ -54,7 +101,7 @@
                                      
                                </select>
                                <div id="brand-error" class="error-message"></div>
-                           </div>
+                           </div> -->
                            <div class="mb-4">
                                <label class="form-label">Full description</label>
                                <textarea placeholder="Type here" id="descriptionid" name="description" class="form-control border"
@@ -95,6 +142,33 @@
                                    </div>
                                    <div id="color-error" class="error-message"></div>
                                </div>
+
+
+
+                               <div class="product-form mb-3">
+                                <div class="d-flex flex-row gap-4 align-items-center">
+                                    <div>
+                                        <label class="mr-5" for="size_s"> S </label>
+                                        <input type="text" name="sizes[s]" id="size_s" min="0" maxlength="2" class="tiny-box">
+                                    </div>
+                                    <div>
+                                        <label class="mr-5" for="size_m"> M </label>
+                                        <input type="text" name="sizes[m]" id="size_m" min="0" maxlength="2" class="tiny-box">
+                                    </div>
+                                    <div>
+                                        <label class="mr-5" for="size_l"> L </label>
+                                        <input type="text" name="sizes[l]" id="size_l" min="0" maxlength="2" class="tiny-box">
+                                    </div>
+                                    <div>
+                                        <label class="mr-5" for="size_xl"> XL </label>
+                                        <input type="text" name="sizes[xl]" id="size_xl" min="0" maxlength="2" class="tiny-box">
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+
+
                             
                            </div>
                            <div class="card mb-4">
@@ -196,7 +270,7 @@
                                                        </div>
                            </div>
                            <div>
-                               <button class="btn btn-md rounded font-sm hover-up"  type="button" onclick="validateAndSubmit()
+                               <button class="btn btn-md rounded font-sm hover-up"  type="submit" onclick="validateAndSubmit()
 ">Publish</button>
                            </div>
                        </form>
@@ -209,56 +283,215 @@
 
 
 <script>
-function validateAndSubmit(){
-    if(validateForm()){
-        document.forms[0].submit
-    }
-} 
+// function validateAndSubmit(){
+//     if(validateForm()){
+//         document.forms[0].submit
+//     }
+// } 
 
-function  viewImage1(event){
-    document.getElementById('imgView1').src=URL.createObjectURL(event.target.files[0])
-}
-function  viewImage2(event){
-    document.getElementById('imgView2').src=URL.createObjectURL(event.target.files[0])
-}
-function  viewImage3(event){
-    document.getElementById('imgView3').src=URL.createObjectURL(event.target.files[0])
-}
-function  viewImage4(event){
-    document.getElementById('imgView4').src=URL.createObjectURL(event.target.files[0])
-}
+// function  viewImage1(event){
+//     document.getElementById('imgView1').src=URL.createObjectURL(event.target.files[0])
+// }
+// function  viewImage2(event){
+//     document.getElementById('imgView2').src=URL.createObjectURL(event.target.files[0])
+// }
+// function  viewImage3(event){
+//     document.getElementById('imgView3').src=URL.createObjectURL(event.target.files[0])
+// }
+// function  viewImage4(event){
+//     document.getElementById('imgView4').src=URL.createObjectURL(event.target.files[0])
+// }
 
-function viwImage(event,index){
-    let input=event.target
-    let reader=new FileReader();
-    reader.onload=function(){
-        let dataURL=reader.result
-        let image=document.getElementById('imgView'+index);
-        image.src=dataURL
+// function viwImage(event,index){
+//     let input=event.target
+//     let reader=new FileReader();
+//     reader.onload=function(){
+//         let dataURL=reader.result
+//         let image=document.getElementById('imgView'+index);
+//         image.src=dataURL
 
 
-        let cropper=new Cropper(image,{
-            aspectRatio:1,
-            viewMode:1,
-            guides:true,
-            background:false,
-            autoCropArea:1,
-            zoomable:true
-        })
-        //now create cropper container for croppping
-        let cropperContainer=document.querySelector("#croppedImg"+index).parentNode
-        cropperContainer.style.display="block"
+//         let cropper=new Cropper(image,{
+//             aspectRatio:1,
+//             viewMode:1,
+//             guides:true,
+//             background:false,
+//             autoCropArea:1,
+//             zoomable:true
+//         })
+//         //now create cropper container for croppping
+//         let cropperContainer=document.querySelector("#croppedImg"+index).parentNode
+//         cropperContainer.style.display="block"
           
-        let saveButton=document.querySelector("#saveButton"+index)
-        saveButton.addEventListener('click',async function(){
-            let croppedCanvas=cropper.getCroppedCanvas()
-            let croppedImage=document.getElementById("#croppedImg"+index)
-            croppedImage.src=croppedCanvas.toDataURL('image/jpeg',1.0);
+//         let saveButton=document.querySelector("#saveButton"+index)
+//         saveButton.addEventListener('click',async function(){
+//             let croppedCanvas=cropper.getCroppedCanvas()
+//             let croppedImage=document.getElementById("#croppedImg"+index)
+//             croppedImage.src=croppedCanvas.toDataURL('image/jpeg',1.0);
 
+
+//             let timestamp = new Date().getTime();
+//             let fileName = `cropped-img-${timestamp}-${index}.png`;
+
+//             await croppedCanvas.toBlob(blob=>{
+//                 let input=document.getElementById('input'+index)
+//                 let imgFile=new File([blob].fileName.blob)
+//                 const fileList=new DateTransfer();
+//                 fileList.items.add(imgFile)
+//                 input.files=fileList.files
+
+//             })
+//             cropperContainer.style.display="none"
+//             cropper.destroy() 
+//         })
+//     }
+//     reader.readAsDataURL(input.files[0])
+// }
+
+// let selectedImage=[]
+// document.getElementById('input1').addEventListener('change',handleFileSelect)
+
+// function handleFileSelect(event){
+//     const addedImagesContainer=document.getElementById('addedImagesContainer')
+//     addedImagesContainer.innerHTML=""
+//     const files=event.target.files
+//     for(let i=0;i<files.length;i++){
+//         const file=files[i]
+//         selectedImage.push(file)
+//         const thumbnail=document.createElement('div')
+//         thumbnail.classList.add("thumbnail")
+
+//     const img=document.createElement('img')
+//     img.src=URL.createObjectURL(file)
+//     img.alt="thumbnail"
+//     img.style.width="50px"
+//     img.style.height="auto"
+//     const removeIcon=document.createElement("span")
+//     removeIcon.classList.add("remove-icon")
+//     removeIcon.innerHTML="&times"
+//     removeIcon.addEventListener('click',function(){
+//         const index=selectedImage.indexOf(file)
+//         if(index!==1){
+//             selectedImage.splice(index,1)
+//         }
+//         thumbnail.remove()
+//     })
+//     thumbnail.appendChild(img)
+//     thumbnail.appendChild(removeIcon)
+//     addedImagesContainer.appendChild(thumbnail)
+//     }
+// }
+function validateAndSubmit() {
+    if (validateForm()) {
+        document.forms[0].submit();
+    }
+}
+
+function viewImage1(event) {
+    document.getElementById('imgView1').src = URL.createObjectURL(event.target.files[0]);
+}
+
+function viewImage2(event) {
+    document.getElementById('imgView2').src = URL.createObjectURL(event.target.files[0]);
+}
+
+function viewImage3(event) {
+    document.getElementById('imgView3').src = URL.createObjectURL(event.target.files[0]);
+}
+
+function viewImage4(event) {
+    document.getElementById('imgView4').src = URL.createObjectURL(event.target.files[0]);
+}
+
+// Corrected function name and image references
+function viewImage(event, index) {
+    let input = event.target;
+    let reader = new FileReader();
+    
+    reader.onload = function () {
+        let dataURL = reader.result;
+        let image = document.getElementById('imgView' + index);
+        image.src = dataURL;
+
+        // Initialize Cropper.js
+        let cropper = new Cropper(image, {
+            aspectRatio: 1,
+            viewMode: 1,
+            guides: true,
+            background: false,
+            autoCropArea: 1,
+            zoomable: true
+        });
+
+        // Display the cropper container
+        let cropperContainer = document.querySelector("#croppedImg" + index).parentNode;
+        cropperContainer.style.display = "block";
+
+        // Handle Save button click
+        let saveButton = document.querySelector("#saveButton" + index);
+        saveButton.addEventListener('click', async function () {
+            let croppedCanvas = cropper.getCroppedCanvas();
+            let croppedImage = document.getElementById("croppedImg" + index);
+            croppedImage.src = croppedCanvas.toDataURL('image/jpeg', 1.0); // Set cropped image source
 
             let timestamp = new Date().getTime();
             let fileName = `cropped-img-${timestamp}-${index}.png`;
-        })
+
+            // Create a Blob from cropped canvas
+            croppedCanvas.toBlob(async (blob) => {
+                // Create a new File object from the Blob
+                let croppedFile = new File([blob], fileName, { type: 'image/png' });
+
+                // Create a DataTransfer object to replace the original input file with the cropped file
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(croppedFile);
+                document.getElementById('input' + index).files = dataTransfer.files; // Replace input files
+
+                // Hide cropper and destroy instance
+                cropperContainer.style.display = "none";
+                cropper.destroy();
+            }, 'image/png');
+        });
+    };
+    reader.readAsDataURL(input.files[0]);
+}
+
+// Handle file selection for multiple images and thumbnails
+let selectedImage = [];
+document.getElementById('input1').addEventListener('change', handleFileSelect);
+
+function handleFileSelect(event) {
+    const addedImagesContainer = document.getElementById('addedImagesContainer');
+    addedImagesContainer.innerHTML = "";
+    const files = event.target.files;
+
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        selectedImage.push(file);
+
+        const thumbnail = document.createElement('div');
+        thumbnail.classList.add("thumbnail");
+
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        img.alt = "thumbnail";
+        img.style.width = "50px";
+        img.style.height = "auto";
+
+        const removeIcon = document.createElement("span");
+        removeIcon.classList.add("remove-icon");
+        removeIcon.innerHTML = "&times;";
+        removeIcon.addEventListener('click', function () {
+            const index = selectedImage.indexOf(file);
+            if (index !== -1) {
+                selectedImage.splice(index, 1);
+            }
+            thumbnail.remove();
+        });
+
+        thumbnail.appendChild(img);
+        thumbnail.appendChild(removeIcon);
+        addedImagesContainer.appendChild(thumbnail);
     }
 }
 
@@ -275,7 +508,7 @@ function validateForm() {
               clearErrorMessages();
               const name = document.getElementsByName('productName')[0].value;
               const description = document.getElementById('descriptionid').value;
-              const brand = document.getElementsByName('brand')[0].value;
+            //   const brand = document.getElementsByName('brand')[0].value;
               const price = document.getElementsByName('regularPrice')[0].value;
               const saleprice = document.getElementsByName('salePrice')[0].value;
               const color = document.getElementsByName('color')[0].value;

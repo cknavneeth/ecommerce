@@ -11,14 +11,14 @@ const productSchema = new Schema({
         type :String,
         required:true,
     },
-    brand: {
-        type:String,
-        required:true,
-    },
+    // brand: {
+    //     type:String,
+    //     required:true,
+    // },
     category: {
         type:Schema.Types.ObjectId,
         ref:"Category",
-        required:true,
+        required:false,
     },
     regularPrice:{
         type:Number,
@@ -54,8 +54,24 @@ const productSchema = new Schema({
         required:true,
         default:"Available"
     },
+    sizes : [
+        {
+            size : {
+                type : String,
+                enum : ['S','M','L',"XL"],
+                required : true,
+            },
+            stock : {
+                type : Number,
+                required : true,
+                min : 0,
+            }
+              }
+          ]
 },{timestamps:true});
 
 const Product = mongoose.model("Product",productSchema);
 
 module.exports = Product;
+
+

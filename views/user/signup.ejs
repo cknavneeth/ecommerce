@@ -1,123 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="/css/signup.css">
-	 
-	<title>Login Page</title>
-</head>
-<body>
-	<div id="container" class="container">
-		<!-- FORM SECTION -->
-		<div class="row">
-			<!-- SIGN UP -->
-			<div class="col align-items-center flex-col sign-up">
-				<div class="form-wrapper align-items-center">
-					<div class="form sign-up">
-						<form action="/signup" method="post">
-						<div class="input-group">
-							<i class='bx bxs-user'></i>
-							<input type="text" placeholder="Username" name="username" required>
-						</div>
-						<div class="input-group">
-							<i class='bx bx-mail-send'></i>
-							<input type="email" placeholder="Email" name="email" required>
-						</div>
-						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i>
-							<input type="password" placeholder="Password" name="password" required>
-						</div>
-						<% if (typeof error !== 'undefined') { %>
-							<div style="color: red;"><%= error %></div>
-						<% } %>
-						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i>
-							<input type="password" placeholder="Confirm password" name="password2" required>
-						</div>
-						<button type="submit">
-							Sign up
-						</button>
-						</form>
-						<p>
-							<span>
-								Already have an account?
-							</span>
-							<b onclick="toggle()" class="pointer">
-								Sign in here
-							</b>
-						</p>
-					</div>
-				</div>
-			</div>
-			<!-- END SIGN UP -->
-			<!-- SIGN IN -->
-			<div class="col align-items-center flex-col sign-in">
-				<div class="form-wrapper align-items-center">
-					<form action="/login" method="post">
-					<div class="form sign-in">
-						<div class="input-group">
-							<i class='bx bxs-user'></i>
-							<input type="text" placeholder="Username" name="username" required>
-						</div>
-						<div class="input-group">
-							<i class='bx bxs-lock-alt'></i>
-							<input type="password" placeholder="Password" name="password" required>
-						</div>
-						<!-- <div>{{.Message}}</div> -->
-						<button type="submit">Login</button>
-						<% if (typeof error !== 'undefined') { %>
-							<p style="color: red;"><%= error %></p>
-						  <% } %>
-					</form>
-						<p>
-							<b>
-								Forgot password?
-							</b>
-						</p>
-						<p>
-							<span>
-								Don't have an account?
-							</span>
-							<b onclick="toggle()" class="pointer">
-								Sign up here
-							</b>
-						</p>
-					</div>
-				</div>
-			</div>
-			<!-- END SIGN IN -->
-		</div>
-		<!-- END FORM SECTION -->
-		<!-- CONTENT SECTION -->
-		<div class="row content-row">
-			<!-- SIGN IN CONTENT -->
-			<div class="col align-items-center flex-col">
-				<div class="text sign-in">
-					<h2>
-						Welcome
-					</h2>
-				</div>
-				<div class="img sign-in">
-					<!-- Add sign-in related image here -->
-				</div>
-			</div>
-			<!-- END SIGN IN CONTENT -->
-			<!-- SIGN UP CONTENT -->
-			<div class="col align-items-center flex-col">
-				<div class="img sign-up">
-					<!-- Add sign-up related image here -->
-				</div>
-				<div class="text sign-up">
-					<h2>
-						Join with us
-					</h2>
-				</div>
-			</div>
-			<!-- END SIGN UP CONTENT -->
-		</div>
-		<!-- END CONTENT SECTION -->
-	</div>
-	<script src="/script/script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Signup Page</title>
+    <style>
+      /* General Styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+
+      /* Form Container */
+      .form-wrapper {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        padding: 2rem;
+      }
+
+      .input-group {
+        margin-bottom: 1rem;
+      }
+
+      .input-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        width: 100%;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #218838;
+      }
+
+      p {
+        text-align: center;
+        margin-top: 1rem;
+      }
+
+      .pointer {
+        cursor: pointer;
+        color: #007bff;
+      }
+
+      .pointer:hover {
+        text-decoration: underline;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .form-wrapper {
+          width: 90%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container" class="container">
+      <div class="form-wrapper align-items-center">
+        <div class="form sign-up">
+          <h2>Join with us</h2>
+          <form id="signupForm" action="/signup" method="post">
+            <div class="input-group">
+              <i class="bx bxs-user"></i>
+              <input
+                type="text"
+                placeholder="Usernameoooo"
+                name="username"
+                id="username"
+              />
+            </div>
+            <div class="input-group">
+              <i class="bx bx-mail-send"></i>
+              <input type="email" placeholder="Email" name="email" id="email" />
+            </div>
+            <div class="input-group">
+              <i class="bx bxs-lock-alt"></i>
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                id="password"
+              />
+            </div>
+            <div class="input-group">
+              <i class="bx bxs-lock-alt"></i>
+              <input
+                type="password"
+                placeholder="Confirm password"
+                name="password2"
+                id="password2"
+              />
+            </div>
+            <% if (typeof error !== 'undefined') { %>
+            <p style="color: red" id="error"><%= error %></p>
+            <% } %>
+            <!-- <p id="error" style="color: red"></p> -->
+            <button type="submit">Sign up</button>
+            <div class="social-btns">
+              <a
+                href="/auth/google"
+                type="button"
+                class="btn btn-outline-danger"
+              >
+                <img
+                  src="/img/google.webp"
+                  alt="Google Logo"
+                  style="width: 24px; height: 24px"
+                />
+              </a>
+                        
+            </div>
+          </form>
+          <p>
+            <span>Already have an account?</span>
+            <!-- <b onclick="togglePage('/login')" class="pointer">Sign in here</b> -->
+            <a href="/login" class="pointer"> Sign in here</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const error = document.getElementById("error");
+      document
+        .getElementById("signupForm")
+        .addEventListener("submit", (event) => {
+          console.log("entered aayi");
+          const username = document.getElementById("username").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("password").value.trim();
+          const password2 = document.getElementById("password2").value.trim();
+
+          // Clear any previous error messages
+          error.textContent = "";
+          // Basic validation
+          let hasError = false;
+
+          if (!password) {
+            error.textContent = "Password is required. ";
+            hasError = true;
+          }
+          if (password !== password2) {
+            error.textContent = "Passwords do not match. ";
+            hasError = true;
+          }
+          if (password.length < 6) {
+            error.textContent = "Passwords must be 6 characters ";
+            hasError = true;
+          }
+          if (!email) {
+            error.textContent = "Email is required. ";
+          }
+          if (!username) {
+            error.textContent = "Username is required. ";
+            hasError = true;
+          }
+          if (hasError) {
+            event.preventDefault();
+          }
+        });
+    </script>
+  </body>
 </html>
